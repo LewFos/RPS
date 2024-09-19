@@ -15,17 +15,6 @@ function getComputerChoice() {
 
  }
 
-
-function getHumanChoice() {
-
-const humanChoice1 = prompt("What's your choice, cherry boy?");
-const humanChoice = humanChoice1.toLowerCase();
-    
-return(humanChoice);
-
-
-}
-
 let humanScore = 0;
 let computerScore = 0;
 let gameLoop = 1;
@@ -83,63 +72,63 @@ function playRound(humanChoicePlay, computerChoicePlay) {
 
 }
 
+function heardClick (humanSelection) {
 
-// one
-var humanSelection = getHumanChoice();
-var computerSelection = getComputerChoice();
-console.log("Computer " + computerSelection);
-console.log("Human " + humanSelection);
+    var computerSelection = getComputerChoice();
+    console.log("Computer " + computerSelection);
+    console.log("Human " + humanSelection);
 
-  
-playRound(humanSelection, computerSelection);
+    
+    playRound(humanSelection, computerSelection);
 
-console.log("Human Score: " + humanScore);
-console.log("Computer Score: " + computerScore);
+    const container = document.querySelector("#container");
+    const content = document.createElement("div");
 
-// two
-var humanSelection = getHumanChoice();
-var computerSelection = getComputerChoice();
-console.log("Computer " + computerSelection);
-console.log("Human " + humanSelection);
+    content.setAttribute('style', 'white-space: pre;');
 
-  
-playRound(humanSelection, computerSelection);
+    content.classList.add("content");
+    content.textContent = "Human Score: " + humanScore + " \r\n";
+    content.textContent += "Computer Score: " + computerScore + " \r\n \r\n";
+    container.appendChild(content);
+    
 
-console.log("Human Score: " + humanScore);
-console.log("Computer Score: " + computerScore);
+    if (humanScore === 5) {
+        alert("YOU WIN!");
+        humanScore = 0;
+        computerScore = 0;
 
-// three
-var humanSelection = getHumanChoice();
-var computerSelection = getComputerChoice();
-console.log("Computer " + computerSelection);
-console.log("Human " + humanSelection);
+        let container = document.getElementById("container");
+        empty(container);
 
-  
-playRound(humanSelection, computerSelection);
 
-console.log("Human Score: " + humanScore);
-console.log("Computer Score: " + computerScore);
+    } else if (computerScore === 5) {
+        alert("YOU SUCK!");
+        humanScore = 0;
+        computerScore = 0;
 
-// four
-var humanSelection = getHumanChoice();
-var computerSelection = getComputerChoice();
-console.log("Computer " + computerSelection);
-console.log("Human " + humanSelection);
+        let container = document.getElementById("container");
+        empty(container);
+        
+    }
 
-  
-playRound(humanSelection, computerSelection);
+    console.log("Human Score: " + humanScore);
+    console.log("Computer Score: " + computerScore);
 
-console.log("Human Score: " + humanScore);
-console.log("Computer Score: " + computerScore);
+}
 
-// five
-var humanSelection = getHumanChoice();
-var computerSelection = getComputerChoice();
-console.log("Computer " + computerSelection);
-console.log("Human " + humanSelection);
+function empty(element) {
+    while(element.firstElementChild) {
+       element.firstElementChild.remove();
+    }
+  }
 
-  
-playRound(humanSelection, computerSelection);
+const buttons = document.querySelectorAll("button");
 
-console.log("Human Score: " + humanScore);
-console.log("Computer Score: " + computerScore);
+
+buttons.forEach((button) => {
+
+  button.addEventListener("click", () => {
+    heardClick(button.id);
+  });
+
+});
